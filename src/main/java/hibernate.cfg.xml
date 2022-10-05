@@ -1,0 +1,26 @@
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.SQLServerDialect
+		</property>
+		<property name="hibernate.connection.driver_class">
+			com.microsoft.sqlserver.jdbc.SQLServerDriver
+		</property>
+		<property name="hibernate.connection.url">
+			jdbc:sqlserver://localhost\sqlexpress:1433;databaseName=SampleDb;trustServerCertificate=true
+		</property>
+		<property name="hibernate.connection.username">
+			MyLogin
+		</property>
+		<property name="hibernate.connection.password">
+			123123
+		</property>
+		<property name="hibernate.show_sql">
+			true
+		</property>
+		<property name="hibernate.connection.pool_size">10</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<mapping class="com.cagatay.DemoProject.entities.User" />
+		<mapping class="com.cagatay.DemoProject.entities.Event" />
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<p:panel header="Login"
+		style="width: 300px; margin: auto; margin-top: 100px">
+		<h:form id="loginForm">
+			<p:growl id="growl" showDetail="true" life="3000" />
+			<h:panelGrid columns="2" id="logingrid" style="width: 100%">
+
+				<h:outputLabel for="l_username" value="Username:" />
+				<p:inputText value="#{loginBean.userName}" id="l_username"
+					label="j_username" style="width: 100%;" />
+
+				<h:outputLabel for="l_password" value="Password" />
+				<p:password value="#{loginBean.password}" id="l_password"
+					label="Password" style="width: 100%;" />
+
+				<f:facet name="footer">
+					<p></p>
+					<h:commandButton action="#{loginBean.login}" value="Login"
+						update="loginForm" style="width: 50%" />
+					<p></p>
+					<h:button outcome="register.xhtml" value="Go to register page" />
+				</f:facet>
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+</h:body>
+</html>

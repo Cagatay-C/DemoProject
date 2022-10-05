@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<p:panel header="Register"
+		style="width: 300px; margin: auto; margin-top: 100px">
+		<h:form id="registerationForm">
+			<p:growl id="growl" showDetail="true" life="3000" />
+			<h:panelGrid columns="2" id="registergrid" style="width: 100%">
+
+				<h:outputLabel for="r_username" value="Username:" />
+				<p:inputText value="#{userManagedBean.user.name}" id="r_username"
+					required="true" label="r_username" style="width: 100%;" />
+
+				<h:outputLabel for="r_email" value="Email:" />
+				<p:inputText value="#{userManagedBean.user.email}" id="r_email"
+					required="true" label="r_email" style="width: 100%;" />
+
+				<h:outputLabel for="r_password" value="Password" />
+				<p:password value="#{userManagedBean.user.password}" id="r_password"
+					label="Password" required="true" style="width: 100%;" />
+
+				<f:facet name="footer">
+					<p></p>
+					<h:commandButton action="#{userManagedBean.save}" value="Submit"
+						update="registrationForm" style="width: 50%" />
+					<p></p>
+					<h:button outcome="login.xhtml" value="Go to login page" />
+				</f:facet>
+			</h:panelGrid>
+		</h:form>
+	</p:panel>
+</h:body>
+</html>

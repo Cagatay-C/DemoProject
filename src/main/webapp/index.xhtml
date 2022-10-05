@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<p:growl id="growl" showDetail="true" life="3000" />
+	<p:panel header="Home" style="height: 500px">
+		<f:facet name="actions">
+			<h:form>
+				<p:growl id="growl" showDetail="true" life="3000" />
+				<p:menuButton value="welcome #{loginBean.userName}">
+					<p:menuitem value="Logout" action="#{loginBean.logout}"
+						icon="ui-icon-extlink" />
+				</p:menuButton>
+			</h:form>
+		</f:facet>
+		<h:form>
+			<p:growl id="messages" showDetail="true" life="3000" />
+
+			<h:panelGrid columnClasses="value">
+				<p:schedule id="schedule" value="#{eventBean.eventModel}"
+					widgetVar="myschedule">
+
+					<p:ajax event="dateSelect" listener="#{eventBean.onDateSelect}"
+						update="eventDetails" oncomplete="PF('eventDialog').show();" />
+					<p:ajax event="eventSelect" listener="#{eventBean.onEventSelect}"
+						update="eventDetails" oncomplete="PF('eventDialog').show();" />
+					<p:ajax event="eventMove" listener="#{eventBean.onEventMove}"
+						update="messages" />
+					<p:ajax event="eventResize" listener="#{eventBean.onEventResize}"
+						update="messages" />
+
+				</p:schedule>
+			</h:panelGrid>
+
+			<p:dialog widgetVar="eventDialog" header="Event Details"
+				showEffect="clip" hideEffect="clip">
+				<h:panelGrid id="eventDetails" columns="2">
+					<p:outputLabel for="title" value="Titles:" />
+					<p:inputText id="title" value="#{eventBean.event.title}"
+						required="true" />
+
+					<p:outputLabel for="from" value="From:" />
+					<p:datePicker id="from" value="#{eventBean.event.startDate}"
+						pattern="dd/MM/yyyy" showTime="true" appendTo="@(body)" />
+
+					<p:outputLabel for="to" value="To:" />
+					<p:datePicker id="to" value="#{eventBean.event.endDate}"
+						pattern="dd/MM/yyyy" showTime="true" appendTo="@(body)" />
+
+					<p:outputLabel for="allDay" value="All Day (see #1164):" />
+					<h:selectBooleanCheckbox id="allDay"
+						value="#{eventBean.event.allDay}" />
+
+					<p:commandButton id="resetButton" value="Reset"
+						actionListener="#{eventBean.deleteEvent}"
+						oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+					<p:commandButton id="addButton" value="Save"
+						action="#{eventBean.addEvent}"
+						oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+	</p:panel>
+</h:body>
+</html>
